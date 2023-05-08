@@ -1,4 +1,5 @@
 import {Student} from "./Students";
+import {readlineSync} from "./Menu";
 
 export class StudentManger {
     students: Student [] = []
@@ -7,10 +8,16 @@ export class StudentManger {
     }
 
     getStudent() {
-        return this.students
+        return this.students;
     }
 
-    addStudent(code: string, name: string, className: string, hometown: string, pointStudent: number, interestStudent: string) {
+    addStudent() {
+        let code = readlineSync.question(`Nhap ma sinh vien:`)
+        let name = readlineSync.question(`Nhap ten sinh vien:`)
+        let className = readlineSync.question(`Nhap lop cua sinh vien:`)
+        let hometown = readlineSync.question(`Nhap dia chi cua sinh vien:`)
+        let pointStudent = readlineSync.question(`Nhap diem cua sinh vien:`)
+        let interestStudent = readlineSync.question(`Nhap so thich  cua sinh vien:`)
         let student = new Student(code, name, className, hometown, pointStudent, interestStudent)
         this.students.push(student);
     }
@@ -18,8 +25,8 @@ export class StudentManger {
     findIndexStudentByCode(code:string) {
         return this.students.findIndex(item => item.getCode() === code);
     }
-
-    findStudent(name: string) {
+    findStudent() {
+        let name   = readlineSync.question("nhap ten cua sinh vien");
         let indexStudent = -1
         for (let i = 0; i < this.students.length; i++) {
             if (name === this.students[i].getName()) {
@@ -32,20 +39,23 @@ export class StudentManger {
 
     }
 
-    updateStudent(code: string, student: Student) {
+    updateStudent() {
+        let code = readlineSync.question(`Nhap ma sinh vien moi:`)
         let indexStudent = this.findIndexStudentByCode(code)
         if (indexStudent !== -1) {
-            this.students[indexStudent] = student
+            let name = readlineSync.question(`Nhap ten sinh vien moi:`)
+            let className = readlineSync.question(`Nhap lop cua sinh vien moi:`)
+            let hometown = readlineSync.question(`Nhap dia chi cua sinh vien moi:`)
+            let pointStudent = readlineSync.question(`Nhap diem cua sinh vien moi:`)
+            let interestStudent = readlineSync.question(`Nhap so thich  cua sinh vien moi:`)
+            this.students[indexStudent] = new Student(code,name,className,hometown,pointStudent,interestStudent)
+            console.log("cap nhat thong tin thanh cong")
         } else console.log('Không tồn tại sinh viên cần update')
     }
 
-    deleteStudent(code: string) {
-        let indexStudent = -1
-        for (let i = 0; i < this.students.length; i++) {
-            if (code === this.students[i].getCode()) {
-                indexStudent = i;
-            }
-        }
+    deleteStudent() {
+        let code = readlineSync.question("Nhap ma sinh vien can xoa ")
+        let indexStudent = this.findIndexStudentByCode(code)
         if(indexStudent !== -1){
             this.students.splice(indexStudent,1)
             console.log("xoa thanh cong")

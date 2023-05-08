@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentManger = void 0;
 var Students_1 = require("./Students");
+var Menu_1 = require("./Menu");
 var StudentManger = /** @class */ (function () {
     function StudentManger() {
         this.students = [];
@@ -9,14 +10,21 @@ var StudentManger = /** @class */ (function () {
     StudentManger.prototype.getStudent = function () {
         return this.students;
     };
-    StudentManger.prototype.addStudent = function (code, name, className, hometown, pointStudent, interestStudent) {
+    StudentManger.prototype.addStudent = function () {
+        var code = Menu_1.readlineSync.question("Nhap ma sinh vien:");
+        var name = Menu_1.readlineSync.question("Nhap ten sinh vien:");
+        var className = Menu_1.readlineSync.question("Nhap lop cua sinh vien:");
+        var hometown = Menu_1.readlineSync.question("Nhap dia chi cua sinh vien:");
+        var pointStudent = Menu_1.readlineSync.question("Nhap diem cua sinh vien:");
+        var interestStudent = Menu_1.readlineSync.question("Nhap so thich  cua sinh vien:");
         var student = new Students_1.Student(code, name, className, hometown, pointStudent, interestStudent);
         this.students.push(student);
     };
     StudentManger.prototype.findIndexStudentByCode = function (code) {
         return this.students.findIndex(function (item) { return item.getCode() === code; });
     };
-    StudentManger.prototype.findStudent = function (name) {
+    StudentManger.prototype.findStudent = function () {
+        var name = Menu_1.readlineSync.question("nhap ten cua sinh vien");
         var indexStudent = -1;
         for (var i = 0; i < this.students.length; i++) {
             if (name === this.students[i].getName()) {
@@ -29,21 +37,24 @@ var StudentManger = /** @class */ (function () {
         else
             console.log("Kh\u00F4ng c\u00F3 d\u1EEF li\u1EC7u ph\u00F9 h\u1EE3p");
     };
-    StudentManger.prototype.updateStudent = function (code, student) {
+    StudentManger.prototype.updateStudent = function () {
+        var code = Menu_1.readlineSync.question("Nhap ma sinh vien moi:");
         var indexStudent = this.findIndexStudentByCode(code);
         if (indexStudent !== -1) {
-            this.students[indexStudent] = student;
+            var name_1 = Menu_1.readlineSync.question("Nhap ten sinh vien moi:");
+            var className = Menu_1.readlineSync.question("Nhap lop cua sinh vien moi:");
+            var hometown = Menu_1.readlineSync.question("Nhap dia chi cua sinh vien moi:");
+            var pointStudent = Menu_1.readlineSync.question("Nhap diem cua sinh vien moi:");
+            var interestStudent = Menu_1.readlineSync.question("Nhap so thich  cua sinh vien moi:");
+            this.students[indexStudent] = new Students_1.Student(code, name_1, className, hometown, pointStudent, interestStudent);
+            console.log("cap nhat thong tin thanh cong");
         }
         else
             console.log('Không tồn tại sinh viên cần update');
     };
-    StudentManger.prototype.deleteStudent = function (code) {
-        var indexStudent = -1;
-        for (var i = 0; i < this.students.length; i++) {
-            if (code === this.students[i].getCode()) {
-                indexStudent = i;
-            }
-        }
+    StudentManger.prototype.deleteStudent = function () {
+        var code = Menu_1.readlineSync.question("Nhap ma sinh vien can xoa ");
+        var indexStudent = this.findIndexStudentByCode(code);
         if (indexStudent !== -1) {
             this.students.splice(indexStudent, 1);
             console.log("xoa thanh cong");
