@@ -1,5 +1,5 @@
 import {Student} from "./Students";
-import {readlineSync} from "./Menu";
+import {readlineSync} from "../Menu";
 
 export class StudentManger {
     students: Student [] = []

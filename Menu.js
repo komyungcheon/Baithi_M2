@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readlineSync = void 0;
-var StudentManager_1 = require("./StudentManager");
+var StudentManager_1 = require("./src/StudentManager");
 exports.readlineSync = require('readline-sync');
 var StudentsManager = new StudentManager_1.StudentManger();
 var menuFunction = [

@@ -1,4 +1,4 @@
-import {StudentManger} from "./StudentManager";
+import {StudentManger} from "./src/StudentManager";
 
 export let readlineSync = require('readline-sync');
 let StudentsManager = new StudentManger();
